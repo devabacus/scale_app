@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "203285890494",
+    "project_id": "scale-app-eb89d",
+    "storage_bucket": "scale-app-eb89d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203285890494:android:3deb31715ca65890d065ef",
+        "android_client_info": {
+          "package_name": "com.example.scale_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDakNYYNO1JkHDvj1e4Bh8EfOsTG9dFELI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

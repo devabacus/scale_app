@@ -1,3 +1,5 @@
+import '../../features/auth/presentation/routing/auth_routes_constants.dart';
+import '../../features/auth/presentation/routing/auth_router_config.dart';
 import '../../features/home/presentation/routing/home_router_config.dart';
 
 // ignore_for_file: unused_import
@@ -15,8 +17,9 @@ part 'router_config.g.dart';
 GoRouter appRouter(Ref ref) {
   return GoRouter(
     // observers: [TalkerRouteObserver(log.talker)],
-    initialLocation: HomeRoutes.homePath,
+    initialLocation: AuthRoutes.authPath,
     routes: [
+			...getAuthRoutes(),
 			...getHomeRoutes(),
         
     ]); 
