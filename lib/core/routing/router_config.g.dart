@@ -1,4 +1,3 @@
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'router_config.dart';
@@ -7,7 +6,7 @@ part of 'router_config.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appRouterHash() => r'436f53c59eea24b0c7ff870ad3c6a206ce952ce9';
+String _$appRouterHash() => r'25b57d351ac5dc6084789a184d804d7e06068f2d';
 
 /// See also [appRouter].
 @ProviderFor(appRouter)
@@ -25,4 +24,3 @@ final appRouterProvider = AutoDisposeProvider<GoRouter>.internal(
 typedef AppRouterRef = AutoDisposeProviderRef<GoRouter>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
-  

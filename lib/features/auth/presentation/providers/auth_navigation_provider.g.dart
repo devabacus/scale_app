@@ -1,4 +1,3 @@
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'auth_navigation_provider.dart';
@@ -8,7 +7,7 @@ part of 'auth_navigation_provider.dart';
 // **************************************************************************
 
 String _$authNavigationServiceHash() =>
-    r'f03c14873caf1ce8f4f324ef853a3117d17c2276';
+    r'a3531525d207cd1161c6340e14def82e94029862';
 
 /// See also [authNavigationService].
 @ProviderFor(authNavigationService)
@@ -30,4 +29,3 @@ typedef AuthNavigationServiceRef =
     AutoDisposeProviderRef<AuthNavigationService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
-
