@@ -1,17 +1,12 @@
-// lib/features/auth/presentation/widgets/sign_in_form.dart
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ui_kit/ui_kit.dart';
 
-// Импортируем провайдер состояния и утилиту для ошибок
 import '../../data/providers/auth_state_provider.dart';
-import '../utils/error_handler.dart'; // <-- Импортируем хелпер
+import '../utils/error_handler.dart'; 
 
-/// Виджет, отображающий форму для входа и регистрации пользователя.
-/// Использует хуки для управления состоянием и контроллерами.
 class SignInForm extends HookConsumerWidget {
   const SignInForm({super.key});
 
@@ -33,16 +28,15 @@ class SignInForm extends HookConsumerWidget {
               emailController.text.trim(),
               passwordController.text.trim(),
             );
-        // Примечание: Навигация теперь обрабатывается GoRouter'ом
+        
       } on FirebaseAuthException catch (e) {
-        // Используем хелпер для получения сообщения об ошибке
-        errorMessage.value = mapFirebaseAuthExceptionToMessage(e); // <-- Используем хелпер
+        errorMessage.value = mapFirebaseAuthExceptionToMessage(e);
       } catch (e) {
-        // Обработка других возможных ошибок
+        
         errorMessage.value = 'Произошла непредвиденная ошибка: $e';
         print('SignIn Error: $e');
       } finally {
-        if (context.mounted) { // Проверка mounted остается важной
+        if (context.mounted) {
           isLoading.value = false;
         }
       }
@@ -58,16 +52,13 @@ class SignInForm extends HookConsumerWidget {
               emailController.text.trim(),
               passwordController.text.trim(),
             );
-         // Примечание: Навигация теперь обрабатывается GoRouter'ом
       } on FirebaseAuthException catch (e) {
-         // Используем хелпер для получения сообщения об ошибке
-        errorMessage.value = mapFirebaseAuthExceptionToMessage(e); // <-- Используем хелпер
+        errorMessage.value = mapFirebaseAuthExceptionToMessage(e); 
       } catch (e) {
-        // Обработка других возможных ошибок
         errorMessage.value = 'Произошла непредвиденная ошибка: $e';
         print('SignUp Error: $e');
       } finally {
-        if (context.mounted) { // Проверка mounted остается важной
+        if (context.mounted) {
            isLoading.value = false;
         }
       }
@@ -100,7 +91,6 @@ class SignInForm extends HookConsumerWidget {
               validator: (value) {
                 if (value == null || value.isEmpty) return 'Пожалуйста, введите пароль';
                 if (value.length < 6) return 'Пароль должен быть не менее 6 символов';
-                // Сюда можно добавить более строгую валидацию пароля при необходимости
                 return null;
               },
             ),
@@ -118,12 +108,12 @@ class SignInForm extends HookConsumerWidget {
               const CircularProgressIndicator()
             else ...[
               ElevatedButton(
-                onPressed: isLoading.value ? null : signIn, // Блокируем кнопку во время загрузки
+                onPressed: isLoading.value ? null : signIn, 
                 child: const Text('Войти'),
               ),
               AppGap.m(),
-              TextButton( // Можно использовать TextButton для менее акцентного действия
-                onPressed: isLoading.value ? null : register, // Блокируем кнопку во время загрузки
+              TextButton( 
+                onPressed: isLoading.value ? null : register, 
                 child: const Text('Регистрация'),
               ),
             ]
