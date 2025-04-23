@@ -471,6 +471,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  gap:
+    dependency: transitive
+    description:
+      name: gap
+      sha256: f19387d4e32f849394758b91377f9153a1b41d79513ef7668c088c77dbc6955d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   glob:
     dependency: transitive
     description:
@@ -1122,6 +1130,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  ui_kit:
+    dependency: "direct main"
+    description:
+      path: "../Packages/ui_kit"
+      relative: true
+    source: path
+    version: "0.0.1"
   url_launcher_linux:
     dependency: transitive
     description:

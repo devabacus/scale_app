@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 // Импортируем провайдер состояния и утилиту для ошибок
 import '../../data/providers/auth_state_provider.dart';
@@ -90,7 +91,7 @@ class SignInForm extends HookConsumerWidget {
                 return null;
               },
             ),
-            const SizedBox(height: 8),
+            
             TextFormField(
               controller: passwordController,
               obscureText: true,
@@ -103,7 +104,7 @@ class SignInForm extends HookConsumerWidget {
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            AppGap.l(),
             if (errorMessage.value != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
@@ -120,7 +121,7 @@ class SignInForm extends HookConsumerWidget {
                 onPressed: isLoading.value ? null : signIn, // Блокируем кнопку во время загрузки
                 child: const Text('Войти'),
               ),
-              const SizedBox(height: 8),
+              AppGap.m(),
               TextButton( // Можно использовать TextButton для менее акцентного действия
                 onPressed: isLoading.value ? null : register, // Блокируем кнопку во время загрузки
                 child: const Text('Регистрация'),
