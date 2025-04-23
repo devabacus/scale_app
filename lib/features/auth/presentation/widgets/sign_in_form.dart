@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ui_kit/ui_kit.dart';
 
+import '../../../home/presentation/routing/home_routes_constants.dart';
 import '../../data/providers/auth_state_provider.dart';
 import '../utils/error_handler.dart'; 
 
@@ -28,7 +30,9 @@ class SignInForm extends HookConsumerWidget {
               emailController.text.trim(),
               passwordController.text.trim(),
             );
-        
+          if (context.mounted) {
+          context.goNamed(HomeRoutes.home);  
+    }
       } on FirebaseAuthException catch (e, s) {
       final message = mapFirebaseAuthExceptionToMessage(e);
       if (context.mounted) {

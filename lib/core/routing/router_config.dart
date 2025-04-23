@@ -17,46 +17,13 @@ part 'router_config.g.dart';
 
 @riverpod
 GoRouter appRouter(Ref ref) {
-    final listenable = ValueNotifier<int>(0);
-  ref.listen(authStateNotifierProvider, (_, next) {
-    if (!next.isLoading) {
-      listenable.value++;
-    }
-  });
-
 
   return GoRouter(
     // observers: [TalkerRouteObserver(log.talker)],
     initialLocation: AuthRoutes.authPath,
-    refreshListenable: listenable, // Говорим роутеру слушать изменения
     routes: [
       ...getAuthRoutes(), // Маршруты аутентификации
       ...getHomeRoutes(), // Маршруты главного экрана
     ],
-    redirect: (BuildContext context, GoRouterState state) {
-      final authState = ref.read(authStateNotifierProvider);
-      final location =
-          state.uri.toString(); // Или state.matchedLocation / state.location
-      final isAuth = authState.hasValue && authState.value != null;
-      final isAuthRoute =
-          location ==
-          AuthRoutes.authPath; // Или сравнение с state.matchedLocation
-
-      if (authState.isLoading) {
-        return null;
-      }
-      if (authState.hasError) {
-        return null; 
-      }
-
-      if (!isAuth && !isAuthRoute) {
-        return AuthRoutes.authPath;
-      }
-
-      if (isAuth && isAuthRoute) {
-        return HomeRoutes.homePath; // <-- Должен вернуть это значение
-      }
-      return null;
-    },
   );
 }
