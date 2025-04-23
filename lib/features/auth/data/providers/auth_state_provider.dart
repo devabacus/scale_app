@@ -16,26 +16,23 @@ class AuthStateNotifier extends _$AuthStateNotifier {
     final authRepository = ref.watch(authRepositoryProvider);
     _authStateSubscription?.cancel();
     final stream = authRepository.authStateChanges();
-    stream.listen(
+    _authStateSubscription = stream.listen(
       (user) {
         state = AsyncData(user);
       },
       onError: (error, stackTrace) {
-        print('Auth state Stream Error: $Error');
         state = AsyncError(error, stackTrace);
       },
     );
     ref.onDispose(() {
       _authStateSubscription?.cancel();
-      print("AuthStateNotifier disposed, stream cancelled");
     });
 
     try {
       // ждем первое событие или ошибку из потока
       final initialUser = await stream.first;
       return initialUser;
-    } catch (e, s) {
-      print('Error fetching initial auth state: $e');
+    } catch (e, _) {
       return null;
     }
   }
@@ -46,9 +43,7 @@ class AuthStateNotifier extends _$AuthStateNotifier {
       await ref
           .read(authRepositoryProvider)
           .signInWithEmailAndPassword(email: email, password: password);
-      print("signIn successful (await completed)");
-    } catch (e, s) {
-      print('Error during signIn: $e');
+    } catch (e, _) {
       rethrow;
     }
   }
@@ -58,15 +53,13 @@ class AuthStateNotifier extends _$AuthStateNotifier {
       await ref
           .read(authRepositoryProvider)
           .signUpWithEmailAndPassword(email: email, password: password);
-    } catch (e, s) {
-       print('Error during signUp: $e');
+    } catch (e, _) {
       rethrow;
     }
   }
 
 
   Future<void> signOut() async {
-    state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       await ref.read(authRepositoryProvider).signOut();
     });
