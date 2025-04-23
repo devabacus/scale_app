@@ -68,4 +68,12 @@ class AuthStateNotifier extends _$AuthStateNotifier {
           .signUpWithEmailAndPassword(email: email, password: password);
     });
   }
+
+  Future<void> signOut() async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      await ref.read(authRepositoryProvider).signOut();
+    });
+  }
+
 }
