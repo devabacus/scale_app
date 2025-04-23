@@ -29,17 +29,26 @@ class SignInForm extends HookConsumerWidget {
               passwordController.text.trim(),
             );
         
-      } on FirebaseAuthException catch (e) {
-        errorMessage.value = mapFirebaseAuthExceptionToMessage(e);
-      } catch (e) {
-        
-        errorMessage.value = 'Произошла непредвиденная ошибка: $e';
-        print('SignIn Error: $e');
-      } finally {
-        if (context.mounted) {
-          isLoading.value = false;
-        }
+      } on FirebaseAuthException catch (e, s) {
+      final message = mapFirebaseAuthExceptionToMessage(e);
+      if (context.mounted) {
+        errorMessage.value = message; // Обновляем ошибку
+      } else {
       }
+    } catch (e, s) {
+       if (context.mounted) {
+       } else {
+         print(">>> SignInForm: Widget disposed before setting error message.");
+       }
+       print('Stack trace: $s');
+    } finally {
+      // Проверяем context.mounted ПЕРЕД обновлением isLoading
+      if (context.mounted) {
+        isLoading.value = false; // Убираем индикатор загрузки
+      } else {
+        print(">>> SignInForm: Widget disposed before setting isLoading=false in finally.");
+      }
+    }
     }
 
     Future<void> register() async {

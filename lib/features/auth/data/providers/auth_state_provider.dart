@@ -13,16 +13,9 @@ class AuthStateNotifier extends _$AuthStateNotifier {
   @override
   FutureOr<User?> build() async {
     ref.keepAlive();
-    // получаем репозиторий
     final authRepository = ref.watch(authRepositoryProvider);
-
-    // отменяем предыдущую подписку при перестроении или удалении
     _authStateSubscription?.cancel();
-
-    // слушаем поток изменений состояния аутентификации
     final stream = authRepository.authStateChanges();
-
-    // подписываемся на поток
     stream.listen(
       (user) {
         state = AsyncData(user);
@@ -32,8 +25,6 @@ class AuthStateNotifier extends _$AuthStateNotifier {
         state = AsyncError(error, stackTrace);
       },
     );
-
-    //Убеждаемся что подписка отменяется при удалении Notifier
     ref.onDispose(() {
       _authStateSubscription?.cancel();
       print("AuthStateNotifier disposed, stream cancelled");
@@ -44,30 +35,35 @@ class AuthStateNotifier extends _$AuthStateNotifier {
       final initialUser = await stream.first;
       return initialUser;
     } catch (e, s) {
-      // если при получении первого значения возникла ошибка
       print('Error fetching initial auth state: $e');
-      state = AsyncError(e, s);
       return null;
     }
   }
 
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
+
+ Future<void> signInWithEmailAndPassword(String email, String password) async {
+    try {
       await ref
           .read(authRepositoryProvider)
           .signInWithEmailAndPassword(email: email, password: password);
-    });
+      print("signIn successful (await completed)");
+    } catch (e, s) {
+      print('Error during signIn: $e');
+      rethrow;
+    }
   }
-
   Future<void> signUpWithEmailAndPassword(String email, String password) async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
+    state = const AsyncLoading(); // Устанавливаем загрузку
+    try {
       await ref
           .read(authRepositoryProvider)
           .signUpWithEmailAndPassword(email: email, password: password);
-    });
+    } catch (e, s) {
+       print('Error during signUp: $e');
+      rethrow;
+    }
   }
+
 
   Future<void> signOut() async {
     state = const AsyncLoading();

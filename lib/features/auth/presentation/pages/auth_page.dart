@@ -34,13 +34,9 @@ class AuthPage extends ConsumerWidget {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stackTrace) {
-          print("Ошибка при проверке состояния аутентификации: $error");
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text('Произошла ошибка: $error'),
-            ),
-          );
+        print("AuthPage: Caught global auth state error: $error. Displaying SignInForm.");
+          return const SignInForm();
+
         },
       ),
     );
