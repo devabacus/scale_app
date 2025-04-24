@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Импортируем провайдер состояния для вызова signOut
 import '../../data/providers/auth_state_provider.dart';
 
-/// Виджет, отображающий информацию об аутентифицированном пользователе
-/// и предоставляющий кнопку для выхода.
 class ProfileDisplay extends ConsumerWidget {
   final User user;
 
@@ -19,8 +17,6 @@ class ProfileDisplay extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Вы вошли как: ${user.email ?? 'Anonymous'}'),
-          // Можно добавить другую информацию о пользователе, если она есть
-          // Например: Text('UID: ${user.uid}'),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () async {

@@ -8,9 +8,6 @@ import '../../data/providers/auth_state_provider.dart';
 import '../widgets/sign_in_form.dart'; // Измененный путь и имя
 import '../widgets/profile_display.dart'; // Измененный путь и имя
 
-/// Главный виджет страницы аутентификации.
-/// Использует Riverpod для отслеживания состояния аутентификации
-/// и отображает либо форму входа/регистрации, либо экран профиля.
 class AuthPage extends ConsumerWidget {
   const AuthPage({super.key});
 
@@ -21,7 +18,6 @@ class AuthPage extends ConsumerWidget {
     return Scaffold(
       body: authState.when(
         data: (user) {
-          // Если пользователь вошел, показываем профиль
           if (user != null) {
             // Используем новый виджет ProfileDisplay
             return ProfileDisplay(user: user);

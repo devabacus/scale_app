@@ -37,13 +37,8 @@ class SignInForm extends HookConsumerWidget {
       final message = mapFirebaseAuthExceptionToMessage(e);
       if (context.mounted) {
         errorMessage.value = message; // Обновляем ошибку
-      } else {
-      }
+      } 
     } catch (e, s) {
-       if (context.mounted) {
-       } else {
-         print(">>> SignInForm: Widget disposed before setting error message.");
-       }
        print('Stack trace: $s');
     } finally {
       // Проверяем context.mounted ПЕРЕД обновлением isLoading
