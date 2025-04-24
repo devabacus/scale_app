@@ -22,8 +22,8 @@ GoRouter appRouter(Ref ref) {
     // observers: [TalkerRouteObserver(log.talker)],
     initialLocation: AuthRoutes.authPath,
     routes: [
-      ...getAuthRoutes(), // Маршруты аутентификации
-      ...getHomeRoutes(), // Маршруты главного экрана
+      ...getAuthRoutes(), 
+      ...getHomeRoutes(), 
     ],
   );
 }
