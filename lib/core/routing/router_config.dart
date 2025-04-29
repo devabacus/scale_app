@@ -1,3 +1,4 @@
+import '../../features/home/presentation/routing/home_routes_constants.dart';
 import 'package:flutter/material.dart'; // Добавь этот импорт
 // ignore_for_file: unused_import
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +21,7 @@ GoRouter appRouter(Ref ref) {
 
   return GoRouter(
     // observers: [TalkerRouteObserver(log.talker)],
-    initialLocation: AuthRoutes.authPath,
+    initialLocation: HomeRoutes.homePath,
     routes: [
       ...getAuthRoutes(), 
       ...getHomeRoutes(), 
