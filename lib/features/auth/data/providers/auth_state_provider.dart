@@ -43,12 +43,11 @@ class AuthStateNotifier extends _$AuthStateNotifier {
       await ref
           .read(authRepositoryProvider)
           .signInWithEmailAndPassword(email: email, password: password);
-    } catch (e, _) {
+    } catch (error, _) {
       rethrow;
     }
   }
   Future<void> signUpWithEmailAndPassword(String email, String password) async {
-    state = const AsyncLoading(); // Устанавливаем загрузку
     try {
       await ref
           .read(authRepositoryProvider)
